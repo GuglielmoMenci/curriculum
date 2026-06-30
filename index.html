@@ -234,6 +234,10 @@ h1,h2,h3{font-family:var(--ff-head);font-weight:600;line-height:1.05;}
 }
 .story-gallery{position:absolute;right:6vw;bottom:8vh;display:flex;gap:14px;z-index:2;}
 .story-gallery img{width:120px;height:160px;object-fit:cover;border-radius:6px;border:1px solid var(--border);}
+.golf-video{
+  margin-top:36px;width:280px;border-radius:8px;border:1px solid var(--border);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
 @media(max-width:900px){.story-gallery{display:none;}.story-content{max-width:100%;}}
 
 /* ===== Mechanics special ===== */
@@ -349,21 +353,22 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
 
 <!-- ===== HERO ===== -->
 <section id="hero">
-  <div class="hero-media"><img src="img/hero-mehari.jpg" alt="Restauro Citroën Méhari" loading="eager"></div>
+  <div class="hero-media"><img src="chitarra.PNG" alt="chitarra" loading="eager" style="object-position: center 75%;"></div>
+
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow" data-anim="fade-up">Arezzo, Italia</div>
     <h1 class="hero-title">
-      <span class="line"><span>GUGLIELMO</span></span>
+      <span class="line"><span>GUGLIELMO ALVISE</span></span>
       <span class="line"><span>MENCI</span></span>
     </h1>
     <div class="hero-roles" data-anim="fade-up">
-      <span>Mechanical Engineering Student</span>
-      <span>Explorer</span>
-      <span>Competitor</span>
-      <span>Builder</span>
+      <span>Maturità 2026</span>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-    <p class="hero-quote" data-anim="fade-up">"Curiosity drives me. Engineering gives it direction."</p>
+    <p class="hero-quote" data-anim="fade-up">"curriculum delle attività extrascolastiche"</p>
   </div>
   <div class="scroll-cue"><span>SCROLL</span><i class="fa-solid fa-chevron-down"></i></div>
 </section>
@@ -374,13 +379,10 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
     <div class="who-text">
       <div class="section-tag" data-anim="fade-up">Chi Sono</div>
       <h2 class="section-title reveal" data-anim="fade-up">Who I Am</h2>
-      <p class="lead reveal" data-anim="fade-up">Sono nato il 5 aprile 2007 ad Arezzo, dove frequento il Liceo Scientifico opzione Scienze Applicate. Ma definirmi attraverso una pagella sarebbe riduttivo: sono qualcuno che non riesce a guardare un motore senza chiedersi come funziona, né una barca a vela senza voler capire perché il vento la spinge.</p>
-      <p class="lead reveal" data-anim="fade-up">Golf, mountain bike enduro, restauro di auto storiche, vela, filosofia. Mondi diversi, accomunati dalla stessa ossessione: capire come le cose funzionano, e farle funzionare meglio. Il prossimo passo si chiama Politecnico di Milano.</p>
+      <p class="lead reveal" data-anim="fade-up">Non riesco a guardare un motore senza chiedermi come funziona, né una barca senza capire perché il vento la spinge.</p>
+      <p class="lead reveal" data-anim="fade-up">in qualsiasi ambito sempre la stessa ossessione: capire come le cose funzionano, e farle funzionare meglio.</p>
       <div class="who-stats">
-        <div class="stat reveal" data-anim="fade-up"><div class="num" data-count="19">0</div><div class="label">Anni</div></div>
-        <div class="stat reveal" data-anim="fade-up"><div class="num" data-count="10">0</div><div class="label">Anni di golf</div></div>
-        <div class="stat reveal" data-anim="fade-up"><div class="num" data-count="6">0</div><div class="label">Anni di enduro</div></div>
-        <div class="stat reveal" data-anim="fade-up"><div class="num">C1</div><div class="label">Cambridge English</div></div>
+        
       </div>
     </div>
     <div class="who-photo reveal" data-anim="fade-left">
@@ -393,14 +395,14 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
 <section id="myworld">
   <div class="section-tag" data-anim="fade-up">Il Mio Mondo</div>
   <h2 class="section-title reveal" data-anim="fade-up">My World</h2>
-  <p class="lead reveal" data-anim="fade-up" style="margin-top:16px;">Quattro passioni, una sola direzione: capire, competere, costruire.</p>
+  <p class="lead reveal" data-anim="fade-up" style="margin-top:16px;">Capire, competere, costruire.</p>
   <div class="world-grid">
     <a href="#golf" class="world-card reveal" data-anim="fade-up">
       <img src="img/golf-swing.jpg" alt="Golf" loading="lazy">
       <div class="world-card-overlay">
         <div class="world-card-num">01</div>
         <h3>Golf</h3>
-        <p>Precisione, controllo, calma sotto pressione.</p>
+        <p>Precisione e controllo.</p>
       </div>
     </a>
     <a href="#enduro" class="world-card reveal" data-anim="fade-up">
@@ -408,7 +410,7 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
       <div class="world-card-overlay">
         <div class="world-card-num">02</div>
         <h3>Enduro</h3>
-        <p>Velocità che richiede assoluto controllo.</p>
+        <p>Velocità sotto controllo.</p>
       </div>
     </a>
     <a href="#nautica" class="world-card reveal" data-anim="fade-up">
@@ -416,7 +418,7 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
       <div class="world-card-overlay">
         <div class="world-card-num">03</div>
         <h3>Patente Nautica</h3>
-        <p>Fisica, meteorologia e navigazione applicate.</p>
+        <p>Fisica e navigazione.</p>
       </div>
     </a>
     <a href="#meccanica" class="world-card reveal" data-anim="fade-up">
@@ -424,7 +426,7 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
       <div class="world-card-overlay">
         <div class="world-card-num">04</div>
         <h3>Meccanica</h3>
-        <p>Restauro di auto storiche, ingranaggio per ingranaggio.</p>
+        <p>Restauro auto storiche.</p>
       </div>
     </a>
   </div>
@@ -437,15 +439,16 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
     <div class="story-content">
       <div class="section-tag" data-anim="fade-up">01 — Sport</div>
       <h2 data-anim="fade-up">Golf</h2>
-      <p class="lead reveal" data-anim="fade-up">Il golf mi accompagna fin dall'infanzia. Anche quando lo studio ha eroso il tempo per gli allenamenti, non ho mai smesso — e le soddisfazioni sono arrivate lo stesso.</p>
+      <p class="lead reveal" data-anim="fade-up">Mi accompagna fin dall'infanzia. Anche quando lo studio ha eroso il tempo, non ho mai smesso.</p>
       <div class="timeline reveal" data-anim="fade-up">
-        <div class="timeline-item"><div class="timeline-dot"></div><span>Campione Sociale Juniores — Golf Club Casentino</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Campione Sociale Juniores</span></div>
         <div class="timeline-item"><div class="timeline-dot"></div><span>Campione Sociale Assoluto — 2025</span></div>
-        <div class="timeline-item"><div class="timeline-dot"></div><span>Squadra Campionato Toscano a Squadre</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Squadra Campionato Toscano</span></div>
       </div>
       <div class="stat-row reveal" data-anim="fade-up">
         <div class="stat"><div class="num" data-count="10">0</div><div class="label">Anni di pratica</div></div>
       </div>
+      <video class="golf-video reveal" data-anim="fade-up" src="img/golf-swing.mp4" autoplay muted loop playsinline></video>
     </div>
   </div>
   <div class="story-gallery"><img src="img/golf-putting.jpg" alt="Putting green" loading="lazy"></div>
@@ -458,10 +461,10 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
     <div class="story-content">
       <div class="section-tag" data-anim="fade-up">02 — Sport</div>
       <h2 data-anim="fade-up">Enduro</h2>
-      <p class="lead reveal" data-anim="fade-up">La mountain bike enduro ha accompagnato l'intero mio percorso liceale: allenamenti e gare con la scuola ciclismo SCA di Arezzo, a livello agonistico, tra boschi, salti e linee da leggere in una frazione di secondo.</p>
+      <p class="lead reveal" data-anim="fade-up">Mi accompagna dall'inizio del liceo: allenamenti e gare con la SCA Arezzo, tra boschi, salti e linee da leggere in un attimo.</p>
       <div class="quote-block reveal" data-anim="fade-up">"Speed without control is only chaos."</div>
       <div class="stat-row reveal" data-anim="fade-up">
-        <div class="stat"><div class="num" data-count="6">0</div><div class="label">Anni agonistici</div></div>
+        <div class="stat"><div class="num" data-count="4">0</div><div class="label">Anni agonistici</div></div>
       </div>
     </div>
   </div>
@@ -478,7 +481,7 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
     <div class="story-content">
       <div class="section-tag" data-anim="fade-up">03 — Patente Nautica</div>
       <h2 data-anim="fade-up">Mare &amp; Vela</h2>
-      <p class="lead reveal" data-anim="fade-up">Nove mesi di studio alla Capitaneria di Porto di Porto Santo Stefano: tre esami teorici e un complesso esame pratico, tra motori, vela e fenomeni meteorologici da interpretare in tempo reale.</p>
+      <p class="lead reveal" data-anim="fade-up">Nove mesi alla Capitaneria di Porto Santo Stefano: tre esami teorici e una prova pratica, tra motori, vela e meteorologia.</p>
       <div class="timeline reveal" data-anim="fade-up">
         <div class="timeline-item"><div class="timeline-dot"></div><span>9 mesi di formazione</span></div>
         <div class="timeline-item"><div class="timeline-dot"></div><span>Meteorologia</span></div>
@@ -497,7 +500,7 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
     <div class="story-content" style="max-width:680px;">
       <div class="section-tag" data-anim="fade-up">04 — Officina</div>
       <h2 data-anim="fade-up">Meccanica &amp; Restauro</h2>
-      <p class="lead reveal" data-anim="fade-up" style="max-width:640px;">Amo capire come funzionano le cose, fino in fondo — non basta usarle, voglio smontarle e rimontarle meglio. Tra un Land Rover Defender, una MG d'epoca e una Citroën Méhari che sto riportando in vita pezzo per pezzo, l'officina è il posto dove la teoria del liceo incontra l'acciaio vero.</p>
+      <p class="lead reveal" data-anim="fade-up" style="max-width:640px;">Amo capire come funzionano le cose fino in fondo. Tra un Defender, una MG d'epoca e una Méhari che sto riportando in vita, l'officina è dove la teoria incontra l'acciaio.</p>
       <div class="timeline reveal" data-anim="fade-up">
         <div class="timeline-item"><div class="timeline-dot"></div><span>Restauro Citroën Méhari — carrozzeria, motore, finiture</span></div>
         <div class="timeline-item"><div class="timeline-dot"></div><span>Manutenzione Land Rover Defender</span></div>
@@ -522,14 +525,14 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
       <div class="lbl">Cambridge</div>
     </div>
     <h2 class="reveal" data-anim="fade-up">Cambridge Assessment English — C1</h2>
-    <p class="lead reveal" data-anim="fade-up">Certificazione conseguita nel 2025. Tra le altre esperienze linguistiche, un laboratorio di adattamento e sottotitolaggio cinematografico a cura di UNICOLLEGGE Firenze, tra traduzione tecnica e invenzioni lessicali.</p>
+    <p class="lead reveal" data-anim="fade-up">Conseguito nel 2025. Tra le esperienze linguistiche, anche un laboratorio di sottotitolaggio cinematografico con UNICOLLEGGE Firenze.</p>
   </div>
 </section>
 
 <!-- ===== PHILOSOPHY ===== -->
 <section id="philosophy">
   <div class="quote-big reveal" data-anim="fade-up"><i class="fa-solid fa-quote-left" style="font-size:.5em;"></i> Il dialogo aperto permette di approfondire argomenti complessi, sviluppando capacità critiche, argomentative e di ascolto.</div>
-  <p class="lead reveal" data-anim="fade-up" style="max-width:620px;">"Caffè Filosofico" — un progetto del Liceo Redi che riunisce gli studenti più curiosi in incontri pomeridiani guidati da docenti di filosofia e storia. Un anno di confronto su temi di attualità che ha reso più maturo il mio modo di pensare e di ascoltare punti di vista diversi.</p>
+  <p class="lead reveal" data-anim="fade-up" style="max-width:620px;">"Caffè Filosofico" — incontri pomeridiani con docenti di filosofia e storia su temi di attualità. Confronto, ascolto, pensiero critico.</p>
 </section>
 
 <!-- ===== FUTURE ===== -->
@@ -554,11 +557,9 @@ footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);let
 <footer>
   <div class="f-name">Guglielmo Alvise Menci</div>
   <div class="f-links">
-    <a href="mailto:guglielmo.menci@example.com"><i class="fa-regular fa-envelope"></i> Email</a>
-    <a href="https://www.linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
     <a href="#hero"><i class="fa-solid fa-arrow-up"></i> Top</a>
   </div>
-  <div class="f-bottom">© 2026 GUGLIELMO MENCI — AREZZO, ITALIA</div>
+  <div class="f-bottom">AREZZO, ITALIA</div>
 </footer>
 
 <!-- ===== Scripts ===== -->
