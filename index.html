@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guglielmo Menci — Engineer in the making</title>
+<meta name="description" content="Portfolio personale di Guglielmo Alvise Menci — Mechanical Engineering Student, Explorer, Competitor, Builder.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root{
+  --black:#06070a;
+  --anthracite:#121419;
+  --anthracite-2:#1b1e26;
+  --grey:#8a8f9c;
+  --grey-light:#c7cad3;
+  --white:#f5f6f8;
+  --blue:#2d6cff;
+  --blue-glow:#4d8bffcc;
+  --border:rgba(255,255,255,0.08);
+  --glass:rgba(255,255,255,0.04);
+  --ff-head:'Space Grotesk',sans-serif;
+  --ff-body:'Inter',sans-serif;
+  --ease:cubic-bezier(.16,.84,.44,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:auto;}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--ff-body);
+  overflow-x:hidden;
+  cursor:none;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--blue);color:#fff;}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:10px;}
+
+/* ===== Custom Cursor ===== */
+.cursor{
+  position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;
+  background:var(--blue);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);transition:width .25s var(--ease),height .25s var(--ease),opacity .25s;
+  mix-blend-mode:difference;
+}
+.cursor-ring{
+  position:fixed;top:0;left:0;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(77,139,255,.6);pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),border-color .3s;
+}
+.cursor.hover{width:6px;height:6px;}
+.cursor-ring.hover{width:60px;height:60px;border-color:var(--blue);}
+@media(max-width:900px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}}
+
+/* ===== Preloader ===== */
+#preloader{
+  position:fixed;inset:0;background:var(--black);z-index:10000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+}
+#preloader .pl-name{font-family:var(--ff-head);font-size:clamp(20px,4vw,34px);letter-spacing:6px;font-weight:500;}
+#preloader .pl-bar{width:220px;height:1px;background:var(--border);position:relative;overflow:hidden;}
+#preloader .pl-bar span{position:absolute;left:0;top:0;height:100%;width:0%;background:var(--blue);}
+#preloader .pl-pct{font-size:11px;letter-spacing:3px;color:var(--grey);font-family:var(--ff-head);}
+
+/* ===== Progress bar (vertical) ===== */
+.scroll-progress{
+  position:fixed;right:28px;top:50%;transform:translateY(-50%);
+  width:2px;height:160px;background:var(--border);z-index:500;
+  border-radius:2px;overflow:hidden;
+}
+.scroll-progress span{
+  position:absolute;left:0;top:0;width:100%;height:0%;
+  background:linear-gradient(180deg,var(--blue),#7eaeff);
+}
+.section-indicator{
+  position:fixed;right:52px;top:50%;transform:translateY(-50%);
+  z-index:500;font-family:var(--ff-head);font-size:11px;letter-spacing:2px;
+  color:var(--grey);writing-mode:vertical-rl;
+}
+.section-indicator span{color:var(--white);}
+@media(max-width:900px){.scroll-progress,.section-indicator{display:none;}}
+
+/* ===== Navbar ===== */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 48px;background:transparent;backdrop-filter:blur(0px);
+  transition:background .4s var(--ease),backdrop-filter .4s var(--ease),padding .4s var(--ease),border-color .4s;
+  border-bottom:1px solid transparent;
+}
+header.scrolled{
+  background:rgba(6,7,10,0.55);backdrop-filter:blur(16px);
+  padding:16px 48px;border-bottom:1px solid var(--border);
+}
+.logo{font-family:var(--ff-head);font-weight:600;letter-spacing:2px;font-size:15px;}
+.logo span{color:var(--blue);}
+nav ul{list-style:none;display:flex;gap:36px;}
+nav a{
+  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey-light);
+  position:relative;padding-bottom:4px;
+}
+nav a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--blue);
+  transition:width .3s var(--ease);
+}
+nav a:hover{color:#fff;}
+nav a:hover::after{width:100%;}
+.burger{display:none;font-size:20px;cursor:pointer;}
+@media(max-width:900px){
+  nav{display:none;}
+  .burger{display:block;}
+  header{padding:18px 24px;}
+}
+
+/* ===== Sections base ===== */
+section{
+  position:relative;width:100%;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:140px 8vw;
+}
+.section-tag{
+  font-family:var(--ff-head);font-size:12px;letter-spacing:4px;color:var(--blue);
+  text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px;
+}
+.section-tag::before{content:'';width:30px;height:1px;background:var(--blue);}
+h1,h2,h3{font-family:var(--ff-head);font-weight:600;line-height:1.05;}
+.section-title{font-size:clamp(36px,6vw,84px);text-transform:uppercase;letter-spacing:-1px;}
+.muted{color:var(--grey);}
+.lead{font-size:clamp(15px,1.3vw,19px);color:var(--grey-light);line-height:1.7;max-width:560px;font-weight:300;}
+
+/* ===== Hero ===== */
+#hero{padding:0;min-height:100svh;}
+.hero-media{position:absolute;inset:0;overflow:hidden;}
+.hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(6,7,10,.55) 0%,rgba(6,7,10,.35) 40%,rgba(6,7,10,.9) 100%);
+}
+.hero-content{
+  position:relative;z-index:2;height:100svh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 8vw 90px;
+}
+.hero-eyebrow{
+  font-family:var(--ff-head);letter-spacing:6px;font-size:12px;color:var(--blue);
+  text-transform:uppercase;margin-bottom:24px;overflow:hidden;
+}
+.hero-title{
+  font-size:clamp(48px,10vw,140px);text-transform:uppercase;letter-spacing:-3px;
+  line-height:.88;overflow:hidden;
+}
+.hero-title .line{display:block;overflow:hidden;}
+.hero-title .line span{display:inline-block;transform:translateY(110%);}
+.hero-roles{
+  display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;font-family:var(--ff-head);
+  font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--grey-light);
+}
+.hero-roles span{
+  border:1px solid var(--border);padding:8px 16px;border-radius:30px;backdrop-filter:blur(6px);background:var(--glass);
+}
+.hero-quote{margin-top:34px;font-size:clamp(15px,1.5vw,20px);color:var(--grey-light);font-weight:300;font-style:italic;max-width:480px;}
+.scroll-cue{
+  position:absolute;bottom:34px;left:8vw;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--ff-head);font-size:11px;letter-spacing:3px;color:var(--grey);
+}
+.scroll-cue i{animation:bounce 1.8s infinite;color:var(--blue);}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+
+/* ===== Who I Am ===== */
+#whoami{padding-top:160px;}
+.who-grid{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:8vw;align-items:center;
+}
+.who-text p{margin-top:22px;}
+.who-stats{display:flex;gap:50px;margin-top:50px;}
+.stat .num{font-family:var(--ff-head);font-size:clamp(34px,4vw,56px);color:var(--blue);font-weight:600;}
+.stat .label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey);margin-top:6px;}
+.who-photo{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/5;}
+.who-photo img{width:100%;height:100%;object-fit:cover;}
+.who-photo::after{
+  content:'';position:absolute;inset:0;border:1px solid var(--border);
+}
+@media(max-width:900px){.who-grid{grid-template-columns:1fr;gap:50px;}.who-photo{order:-1;}}
+
+/* ===== My World cards ===== */
+#myworld{padding-top:160px;}
+.world-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:60px;
+}
+.world-card{
+  position:relative;height:46vh;min-height:340px;border-radius:8px;overflow:hidden;
+  cursor:pointer;border:1px solid var(--border);
+}
+.world-card img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .8s;filter:grayscale(.35) brightness(.65);}
+.world-card:hover img{transform:scale(1.08);filter:grayscale(0) brightness(.55);}
+.world-card-overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:34px;
+  background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 55%);
+}
+.world-card-num{font-family:var(--ff-head);font-size:12px;color:var(--blue);letter-spacing:2px;}
+.world-card h3{font-size:clamp(24px,2.4vw,34px);text-transform:uppercase;margin-top:8px;}
+.world-card p{font-size:13px;color:var(--grey-light);margin-top:6px;max-width:260px;}
+@media(max-width:900px){.world-grid{grid-template-columns:1fr;}}
+
+/* ===== Fullscreen story sections (golf/enduro/boat/mech) ===== */
+.story{padding:0;min-height:100vh;position:relative;overflow:hidden;}
+.story-bg{position:absolute;inset:0;}
+.story-bg img{width:100%;height:100%;object-fit:cover;}
+.story-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,7,10,.96) 0%,rgba(6,7,10,.7) 45%,rgba(6,7,10,.25) 100%);}
+.story-inner{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;padding:120px 8vw;}
+.story-content{max-width:620px;}
+.story-content h2{font-size:clamp(38px,6.5vw,90px);text-transform:uppercase;letter-spacing:-2px;margin-bottom:24px;}
+.story-content p{margin-top:18px;}
+.timeline{margin-top:40px;display:flex;flex-direction:column;gap:0;}
+.timeline-item{
+  display:flex;gap:18px;padding:16px 0;border-bottom:1px solid var(--border);align-items:center;
+}
+.timeline-item:first-child{border-top:1px solid var(--border);}
+.timeline-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;box-shadow:0 0 12px var(--blue-glow);}
+.timeline-item span{font-size:14px;color:var(--grey-light);letter-spacing:.3px;}
+.stat-row{display:flex;gap:46px;margin-top:44px;}
+.stat-row .stat .num{color:#fff;}
+.quote-block{
+  margin-top:40px;padding-left:22px;border-left:2px solid var(--blue);
+  font-style:italic;font-size:clamp(16px,1.6vw,22px);color:var(--grey-light);font-weight:300;
+}
+.story-gallery{position:absolute;right:6vw;bottom:8vh;display:flex;gap:14px;z-index:2;}
+.story-gallery img{width:120px;height:160px;object-fit:cover;border-radius:6px;border:1px solid var(--border);}
+@media(max-width:900px){.story-gallery{display:none;}.story-content{max-width:100%;}}
+
+/* ===== Mechanics special ===== */
+#meccanica .mech-mosaic{
+  position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  margin-top:50px;max-width:900px;
+}
+.mech-mosaic img{width:100%;height:160px;object-fit:cover;border-radius:6px;border:1px solid var(--border);
+  filter:grayscale(.5);transition:filter .5s,transform .5s var(--ease);}
+.mech-mosaic img:hover{filter:grayscale(0);transform:translateY(-6px);}
+.gear-decor{position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-size:380px;color:rgba(45,108,255,.05);z-index:1;pointer-events:none;}
+@media(max-width:900px){.mech-mosaic{grid-template-columns:repeat(2,1fr);max-width:100%;}.gear-decor{display:none;}}
+
+/* ===== English badge ===== */
+#english{align-items:center;text-align:center;min-height:80vh;}
+.badge-wrap{display:flex;flex-direction:column;align-items:center;gap:26px;margin:0 auto;}
+.badge{
+  width:180px;height:180px;border-radius:50%;border:1px solid var(--blue);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle,rgba(45,108,255,.12),transparent 70%);
+  box-shadow:0 0 60px rgba(45,108,255,.18);
+}
+.badge .lvl{font-family:var(--ff-head);font-size:48px;font-weight:700;color:var(--blue);}
+.badge .lbl{font-size:10px;letter-spacing:2px;color:var(--grey-light);margin-top:4px;text-transform:uppercase;}
+#english h2{font-size:clamp(28px,4vw,46px);margin-top:10px;}
+#english p{max-width:520px;margin:14px auto 0;}
+
+/* ===== Philosophy ===== */
+#philosophy{
+  background:linear-gradient(180deg,var(--black),var(--anthracite) 200%);
+  align-items:center;text-align:center;
+}
+#philosophy .quote-big{
+  font-family:var(--ff-head);font-size:clamp(26px,4vw,52px);max-width:880px;margin:0 auto;
+  line-height:1.25;font-weight:400;
+}
+#philosophy .quote-big i{color:var(--blue);}
+#philosophy p.lead{margin:34px auto 0;text-align:left;}
+
+/* ===== Future ===== */
+#future{
+  background:var(--black);align-items:center;text-align:center;min-height:100vh;
+}
+.future-lines{position:absolute;inset:0;opacity:.5;pointer-events:none;}
+.future-big{font-family:var(--ff-head);font-size:clamp(36px,8vw,120px);text-transform:uppercase;letter-spacing:-2px;line-height:1;}
+.future-words{
+  display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:40px;
+  font-family:var(--ff-head);font-size:clamp(16px,2vw,26px);color:var(--grey);
+}
+.future-words span{opacity:.15;transition:opacity .4s;}
+.future-words span.lit{opacity:1;color:#fff;}
+
+/* ===== Finale ===== */
+#finale{
+  padding:0;min-height:100vh;position:relative;
+}
+#finale .story-bg img{filter:brightness(.55);}
+#finale .story-inner{justify-content:center;text-align:center;flex-direction:column;align-items:center;}
+#finale h2{font-size:clamp(34px,6vw,80px);text-transform:uppercase;letter-spacing:-1px;max-width:900px;}
+
+/* ===== Footer ===== */
+footer{
+  padding:70px 8vw 40px;display:flex;justify-content:space-between;align-items:flex-end;
+  border-top:1px solid var(--border);flex-wrap:wrap;gap:30px;
+}
+footer .f-name{font-family:var(--ff-head);font-size:20px;letter-spacing:1px;}
+footer .f-links{display:flex;gap:26px;font-size:13px;color:var(--grey-light);}
+footer .f-links a:hover{color:var(--blue);}
+footer .f-bottom{width:100%;margin-top:40px;font-size:11px;color:var(--grey);letter-spacing:1px;}
+
+/* ===== Reveal utility ===== */
+.reveal{opacity:0;transform:translateY(40px);}
+
+/* ===== Responsive tweaks ===== */
+@media(max-width:600px){
+  section{padding:110px 6vw;}
+  .story-inner{padding:100px 6vw;}
+  .mech-mosaic{gap:10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Preloader ===== -->
+<div id="preloader">
+  <div class="pl-name">GUGLIELMO MENCI</div>
+  <div class="pl-bar"><span id="plFill"></span></div>
+  <div class="pl-pct" id="plPct">0%</div>
+</div>
+
+<!-- ===== Custom cursor ===== -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ===== Scroll progress ===== -->
+<div class="scroll-progress"><span id="progressFill"></span></div>
+<div class="section-indicator" id="sectionIndicator">HERO</div>
+
+<!-- ===== Navbar ===== -->
+<header id="siteHeader">
+  <div class="logo">G<span>.</span>MENCI</div>
+  <nav>
+    <ul>
+      <li><a href="#whoami">Who I Am</a></li>
+      <li><a href="#myworld">My World</a></li>
+      <li><a href="#meccanica">Meccanica</a></li>
+      <li><a href="#future">Futuro</a></li>
+      <li><a href="#finale">Contatti</a></li>
+    </ul>
+  </nav>
+  <div class="burger"><i class="fa-solid fa-bars"></i></div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-media"><img src="img/hero-mehari.jpg" alt="Restauro Citroën Méhari" loading="eager"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-anim="fade-up">Arezzo, Italia</div>
+    <h1 class="hero-title">
+      <span class="line"><span>GUGLIELMO</span></span>
+      <span class="line"><span>MENCI</span></span>
+    </h1>
+    <div class="hero-roles" data-anim="fade-up">
+      <span>Mechanical Engineering Student</span>
+      <span>Explorer</span>
+      <span>Competitor</span>
+      <span>Builder</span>
+    </div>
+    <p class="hero-quote" data-anim="fade-up">"Curiosity drives me. Engineering gives it direction."</p>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><i class="fa-solid fa-chevron-down"></i></div>
+</section>
+
+<!-- ===== WHO I AM ===== -->
+<section id="whoami">
+  <div class="who-grid">
+    <div class="who-text">
+      <div class="section-tag" data-anim="fade-up">Chi Sono</div>
+      <h2 class="section-title reveal" data-anim="fade-up">Who I Am</h2>
+      <p class="lead reveal" data-anim="fade-up">Sono nato il 5 aprile 2007 ad Arezzo, dove frequento il Liceo Scientifico opzione Scienze Applicate. Ma definirmi attraverso una pagella sarebbe riduttivo: sono qualcuno che non riesce a guardare un motore senza chiedersi come funziona, né una barca a vela senza voler capire perché il vento la spinge.</p>
+      <p class="lead reveal" data-anim="fade-up">Golf, mountain bike enduro, restauro di auto storiche, vela, filosofia. Mondi diversi, accomunati dalla stessa ossessione: capire come le cose funzionano, e farle funzionare meglio. Il prossimo passo si chiama Politecnico di Milano.</p>
+      <div class="who-stats">
+        <div class="stat reveal" data-anim="fade-up"><div class="num" data-count="19">0</div><div class="label">Anni</div></div>
+        <div class="stat reveal" data-anim="fade-up"><div class="num" data-count="10">0</div><div class="label">Anni di golf</div></div>
+        <div class="stat reveal" data-anim="fade-up"><div class="num" data-count="6">0</div><div class="label">Anni di enduro</div></div>
+        <div class="stat reveal" data-anim="fade-up"><div class="num">C1</div><div class="label">Cambridge English</div></div>
+      </div>
+    </div>
+    <div class="who-photo reveal" data-anim="fade-left">
+      <img src="img/profile-sailing.jpg" alt="Guglielmo Menci in barca a vela" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== MY WORLD ===== -->
+<section id="myworld">
+  <div class="section-tag" data-anim="fade-up">Il Mio Mondo</div>
+  <h2 class="section-title reveal" data-anim="fade-up">My World</h2>
+  <p class="lead reveal" data-anim="fade-up" style="margin-top:16px;">Quattro passioni, una sola direzione: capire, competere, costruire.</p>
+  <div class="world-grid">
+    <a href="#golf" class="world-card reveal" data-anim="fade-up">
+      <img src="img/golf-swing.jpg" alt="Golf" loading="lazy">
+      <div class="world-card-overlay">
+        <div class="world-card-num">01</div>
+        <h3>Golf</h3>
+        <p>Precisione, controllo, calma sotto pressione.</p>
+      </div>
+    </a>
+    <a href="#enduro" class="world-card reveal" data-anim="fade-up">
+      <img src="img/enduro-jump.jpg" alt="Enduro" loading="lazy">
+      <div class="world-card-overlay">
+        <div class="world-card-num">02</div>
+        <h3>Enduro</h3>
+        <p>Velocità che richiede assoluto controllo.</p>
+      </div>
+    </a>
+    <a href="#nautica" class="world-card reveal" data-anim="fade-up">
+      <img src="img/profile-sailing.jpg" alt="Vela" loading="lazy">
+      <div class="world-card-overlay">
+        <div class="world-card-num">03</div>
+        <h3>Patente Nautica</h3>
+        <p>Fisica, meteorologia e navigazione applicate.</p>
+      </div>
+    </a>
+    <a href="#meccanica" class="world-card reveal" data-anim="fade-up">
+      <img src="img/mg-engine.jpg" alt="Meccanica" loading="lazy">
+      <div class="world-card-overlay">
+        <div class="world-card-num">04</div>
+        <h3>Meccanica</h3>
+        <p>Restauro di auto storiche, ingranaggio per ingranaggio.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ===== GOLF ===== -->
+<section class="story" id="golf">
+  <div class="story-bg"><img src="img/golf-swing.jpg" alt="Golf swing"></div>
+  <div class="story-inner">
+    <div class="story-content">
+      <div class="section-tag" data-anim="fade-up">01 — Sport</div>
+      <h2 data-anim="fade-up">Golf</h2>
+      <p class="lead reveal" data-anim="fade-up">Il golf mi accompagna fin dall'infanzia. Anche quando lo studio ha eroso il tempo per gli allenamenti, non ho mai smesso — e le soddisfazioni sono arrivate lo stesso.</p>
+      <div class="timeline reveal" data-anim="fade-up">
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Campione Sociale Juniores — Golf Club Casentino</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Campione Sociale Assoluto — 2025</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Squadra Campionato Toscano a Squadre</span></div>
+      </div>
+      <div class="stat-row reveal" data-anim="fade-up">
+        <div class="stat"><div class="num" data-count="10">0</div><div class="label">Anni di pratica</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="story-gallery"><img src="img/golf-putting.jpg" alt="Putting green" loading="lazy"></div>
+</section>
+
+<!-- ===== ENDURO ===== -->
+<section class="story" id="enduro">
+  <div class="story-bg"><img src="img/enduro-jump.jpg" alt="Enduro jump nel bosco"></div>
+  <div class="story-inner">
+    <div class="story-content">
+      <div class="section-tag" data-anim="fade-up">02 — Sport</div>
+      <h2 data-anim="fade-up">Enduro</h2>
+      <p class="lead reveal" data-anim="fade-up">La mountain bike enduro ha accompagnato l'intero mio percorso liceale: allenamenti e gare con la scuola ciclismo SCA di Arezzo, a livello agonistico, tra boschi, salti e linee da leggere in una frazione di secondo.</p>
+      <div class="quote-block reveal" data-anim="fade-up">"Speed without control is only chaos."</div>
+      <div class="stat-row reveal" data-anim="fade-up">
+        <div class="stat"><div class="num" data-count="6">0</div><div class="label">Anni agonistici</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="story-gallery">
+    <img src="img/enduro-portrait.jpg" alt="Enduro start" loading="lazy">
+    <img src="img/enduro-group.jpg" alt="Enduro gruppo" loading="lazy">
+  </div>
+</section>
+
+<!-- ===== NAUTICA ===== -->
+<section class="story" id="nautica">
+  <div class="story-bg"><img src="img/profile-sailing.jpg" alt="Vela in mare"></div>
+  <div class="story-inner">
+    <div class="story-content">
+      <div class="section-tag" data-anim="fade-up">03 — Patente Nautica</div>
+      <h2 data-anim="fade-up">Mare &amp; Vela</h2>
+      <p class="lead reveal" data-anim="fade-up">Nove mesi di studio alla Capitaneria di Porto di Porto Santo Stefano: tre esami teorici e un complesso esame pratico, tra motori, vela e fenomeni meteorologici da interpretare in tempo reale.</p>
+      <div class="timeline reveal" data-anim="fade-up">
+        <div class="timeline-item"><div class="timeline-dot"></div><span>9 mesi di formazione</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Meteorologia</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Navigazione</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Vela &amp; Motori</span></div>
+      </div>
+      <div class="quote-block reveal" data-anim="fade-up">Future Goal: Politecnico Sailing Team</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MECCANICA ===== -->
+<section class="story" id="meccanica">
+  <div class="story-bg"><img src="img/mehari-restoration.jpg" alt="Officina restauro auto storiche"></div>
+  <div class="story-inner">
+    <div class="story-content" style="max-width:680px;">
+      <div class="section-tag" data-anim="fade-up">04 — Officina</div>
+      <h2 data-anim="fade-up">Meccanica &amp; Restauro</h2>
+      <p class="lead reveal" data-anim="fade-up" style="max-width:640px;">Amo capire come funzionano le cose, fino in fondo — non basta usarle, voglio smontarle e rimontarle meglio. Tra un Land Rover Defender, una MG d'epoca e una Citroën Méhari che sto riportando in vita pezzo per pezzo, l'officina è il posto dove la teoria del liceo incontra l'acciaio vero.</p>
+      <div class="timeline reveal" data-anim="fade-up">
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Restauro Citroën Méhari — carrozzeria, motore, finiture</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>Manutenzione Land Rover Defender</span></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><span>MG d'epoca — impianto elettrico e motore</span></div>
+      </div>
+      <div class="mech-mosaic">
+        <img src="img/mg-engine.jpg" alt="Vano motore MG" loading="lazy">
+        <img src="img/defender-engine.jpg" alt="Vano motore Defender" loading="lazy">
+        <img src="img/mehari-restoration.jpg" alt="Méhari in restauro" loading="lazy">
+        <img src="img/hero-mehari.jpg" alt="Méhari restaurata" loading="lazy">
+      </div>
+    </div>
+  </div>
+  <i class="fa-solid fa-gear gear-decor"></i>
+</section>
+
+<!-- ===== ENGLISH ===== -->
+<section id="english">
+  <div class="badge-wrap">
+    <div class="badge reveal" data-anim="scale">
+      <div class="lvl">C1</div>
+      <div class="lbl">Cambridge</div>
+    </div>
+    <h2 class="reveal" data-anim="fade-up">Cambridge Assessment English — C1</h2>
+    <p class="lead reveal" data-anim="fade-up">Certificazione conseguita nel 2025. Tra le altre esperienze linguistiche, un laboratorio di adattamento e sottotitolaggio cinematografico a cura di UNICOLLEGGE Firenze, tra traduzione tecnica e invenzioni lessicali.</p>
+  </div>
+</section>
+
+<!-- ===== PHILOSOPHY ===== -->
+<section id="philosophy">
+  <div class="quote-big reveal" data-anim="fade-up"><i class="fa-solid fa-quote-left" style="font-size:.5em;"></i> Il dialogo aperto permette di approfondire argomenti complessi, sviluppando capacità critiche, argomentative e di ascolto.</div>
+  <p class="lead reveal" data-anim="fade-up" style="max-width:620px;">"Caffè Filosofico" — un progetto del Liceo Redi che riunisce gli studenti più curiosi in incontri pomeridiani guidati da docenti di filosofia e storia. Un anno di confronto su temi di attualità che ha reso più maturo il mio modo di pensare e di ascoltare punti di vista diversi.</p>
+</section>
+
+<!-- ===== FUTURE ===== -->
+<section id="future">
+  <div class="future-lines"></div>
+  <div class="section-tag" style="justify-content:center;" data-anim="fade-up">Il Prossimo Capitolo</div>
+  <h2 class="future-big reveal" data-anim="fade-up">Politecnico<br>di Milano</h2>
+  <div class="future-words" id="futureWords">
+    <span>Mechanical</span><span>Engineering</span><span>Innovation</span><span>Research</span><span>Entrepreneurship</span>
+  </div>
+</section>
+
+<!-- ===== FINALE ===== -->
+<section id="finale" class="story">
+  <div class="story-bg"><img src="img/hero-mehari.jpg" alt="Foto finale"></div>
+  <div class="story-inner">
+    <h2 class="reveal" data-anim="fade-up">This is only the beginning.</h2>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="f-name">Guglielmo Alvise Menci</div>
+  <div class="f-links">
+    <a href="mailto:guglielmo.menci@example.com"><i class="fa-regular fa-envelope"></i> Email</a>
+    <a href="https://www.linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+    <a href="#hero"><i class="fa-solid fa-arrow-up"></i> Top</a>
+  </div>
+  <div class="f-bottom">© 2026 GUGLIELMO MENCI — AREZZO, ITALIA</div>
+</footer>
+
+<!-- ===== Scripts ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ---------- Preloader ---------- */
+window.addEventListener('load', () => {
+  let progress = 0;
+  const fill = document.getElementById('plFill');
+  const pct = document.getElementById('plPct');
+  const interval = setInterval(() => {
+    progress += Math.random() * 18;
+    if (progress >= 100) { progress = 100; clearInterval(interval); }
+    fill.style.width = progress + '%';
+    pct.textContent = Math.floor(progress) + '%';
+    if (progress === 100) {
+      setTimeout(() => {
+        gsap.to('#preloader', {
+          yPercent: -100, duration: 1, ease: 'power3.inOut',
+          onComplete: () => { document.getElementById('preloader').style.display = 'none'; playHeroIntro(); }
+        });
+      }, 250);
+    }
+  }, 120);
+});
+
+/* ---------- Hero intro animation ---------- */
+function playHeroIntro(){
+  gsap.to('.hero-title .line span', { yPercent:0, duration:1.1, stagger:.12, ease:'power4.out' });
+  gsap.to('.hero-eyebrow, .hero-roles, .hero-quote', { opacity:1, y:0, duration:1, delay:.6, stagger:.15, ease:'power3.out' });
+}
+gsap.set('.hero-eyebrow, .hero-roles, .hero-quote', { opacity:0, y:20 });
+
+/* ---------- Lenis smooth scroll ---------- */
+const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+function raf(time){ lenis.raf(time); ScrollTrigger.update(); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+lenis.on('scroll', ScrollTrigger.update);
+
+/* ---------- Custom cursor ---------- */
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+window.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+gsap.ticker.add(()=>{ rx += (mx-rx)*0.15; ry += (my-ry)*0.15; ring.style.left=rx+'px'; ring.style.top=ry+'px'; });
+document.querySelectorAll('a, .world-card, .badge, button').forEach(el=>{
+  el.addEventListener('mouseenter', ()=>{ cursor.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', ()=>{ cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+
+/* ---------- Navbar on scroll ---------- */
+const header = document.getElementById('siteHeader');
+ScrollTrigger.create({
+  start: 'top -80', end: 99999,
+  onUpdate: self => header.classList.toggle('scrolled', self.scroll() > 80)
+});
+
+/* ---------- Vertical progress + section indicator ---------- */
+const progressFill = document.getElementById('progressFill');
+const sectionIndicator = document.getElementById('sectionIndicator');
+const sections = document.querySelectorAll('section');
+ScrollTrigger.create({
+  start:0, end: () => document.body.scrollHeight - window.innerHeight,
+  onUpdate: self => { progressFill.style.height = (self.progress*100)+'%'; }
+});
+sections.forEach(sec=>{
+  ScrollTrigger.create({
+    trigger: sec, start:'top center', end:'bottom center',
+    onEnter: () => sectionIndicator.innerHTML = (sec.id||'').toUpperCase().slice(0,10),
+    onEnterBack: () => sectionIndicator.innerHTML = (sec.id||'').toUpperCase().slice(0,10),
+  });
+});
+
+/* ---------- Generic reveal animations ---------- */
+document.querySelectorAll('.reveal').forEach(el=>{
+  gsap.fromTo(el, { opacity:0, y:50, filter:'blur(6px)' }, {
+    opacity:1, y:0, filter:'blur(0px)', duration:1, ease:'power3.out',
+    scrollTrigger: { trigger: el, start:'top 88%' }
+  });
+});
+document.querySelectorAll('[data-anim="fade-left"]').forEach(el=>{
+  gsap.fromTo(el, { opacity:0, x:60 }, {
+    opacity:1, x:0, duration:1.1, ease:'power3.out',
+    scrollTrigger:{ trigger: el, start:'top 85%' }
+  });
+});
+document.querySelectorAll('[data-anim="scale"]').forEach(el=>{
+  gsap.fromTo(el, { opacity:0, scale:.6 }, {
+    opacity:1, scale:1, duration:1, ease:'back.out(1.7)',
+    scrollTrigger:{ trigger: el, start:'top 85%' }
+  });
+});
+
+/* ---------- Animated counters ---------- */
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const target = parseInt(el.dataset.count, 10);
+  ScrollTrigger.create({
+    trigger: el, start:'top 90%', once:true,
+    onEnter: () => {
+      let obj = { val:0 };
+      gsap.to(obj, { val: target, duration: 1.6, ease:'power2.out',
+        onUpdate: () => el.textContent = Math.floor(obj.val) });
+    }
+  });
+});
+
+/* ---------- World cards stagger reveal ---------- */
+gsap.utils.toArray('.world-card').forEach((card,i)=>{
+  gsap.fromTo(card, { opacity:0, y:60 }, {
+    opacity:1, y:0, duration:.9, delay:i*0.08, ease:'power3.out',
+    scrollTrigger:{ trigger: card, start:'top 90%' }
+  });
+});
+
+/* ---------- Story sections parallax bg ---------- */
+document.querySelectorAll('.story-bg img').forEach(img=>{
+  gsap.fromTo(img, { yPercent:-8, scale:1.15 }, {
+    yPercent:8, scale:1.15, ease:'none',
+    scrollTrigger:{ trigger: img.closest('.story'), start:'top bottom', end:'bottom top', scrub:true }
+  });
+});
+
+/* ---------- Future words light-up ---------- */
+const futureWords = document.querySelectorAll('#futureWords span');
+futureWords.forEach((w,i)=>{
+  ScrollTrigger.create({
+    trigger:'#future', start: () => 'top center+=' + (i*60),
+    onEnter: () => w.classList.add('lit'),
+  });
+});
+
+/* ---------- Mechanics gear decor parallax ---------- */
+gsap.to('.gear-decor', {
+  rotation:360, ease:'none',
+  scrollTrigger:{ trigger:'#meccanica', start:'top bottom', end:'bottom top', scrub:1 }
+});
+
+/* ---------- Smooth nav anchor links ---------- */
+document.querySelectorAll('nav a, footer a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target) lenis.scrollTo(target, { duration: 1.3 });
+  });
+});
+</script>
+</body>
+</html>
